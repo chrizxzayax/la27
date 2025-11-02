@@ -5,7 +5,6 @@
 #include <vector>
 #include <tuple>
 #include <string>
-#include <algorithm>
 #include <limits>
 
 using namespace std;
@@ -217,6 +216,39 @@ void addvillager(map<string, VillagerInfo> &m) {
     cout << name << " added.\n";
 }
 
+void deletevillager(map<string, VillagerInfo> &m) {
+    if (m.empty()) {
+        cout << "No villagers to delete.\n";
+        return;
+    }
+    cout << "selec the villager to delete:\n";
+    int idx = 1;
+    vector<string> keys;
+    for (const auto &p : m) {
+        cout << "  [" << idx << "] " << p.first << " "
+             << "[" << get<0>(p.second) << ", " << get<1>(p.second) << ", " << get<2>(p.second) << "]\n";
+        keys.push_back(p.first);
+        ++idx;
+    }
+    cout << "Choice --> ";
+    int choice;
+    while (!(cin >> choice) || choice < 0 || choice >= idx) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Enter a valid number between 0 and " << (idx - 1) << ": ";
+    }
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    if (choice == 0) {
+        cout << "Delete cancelled.\n";
+        return;
+    }
+    string name_to_delete = keys[choice - 1];
+    m.erase(name_to_delete);
+    cout << name_to_delete << " deleted.\n";
+
+}
+
 void mstone4_demo() {
 
     cout << "milestone 4 demo\n";
@@ -234,8 +266,8 @@ void mstone4_demo() {
                 printvillagerM(villager_details);
                 break;
             case 2:
-                // deletevillager(villager_details);
-                // printvillagerM(villager_details);
+                deletevillager(villager_details);
+                printvillagerM(villager_details);
                 break;
             case 3: {
                 cout << "Name to increase: ";
@@ -270,6 +302,6 @@ int main() {
     cout << "villager map milestones demo\n";
     //i got confused on the last milestone and i added the whole code but i could just added the mstone3_demo
 
-    
 
+    mstone4_demo();
 }
