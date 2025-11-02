@@ -87,27 +87,83 @@ int mainmenu() {
 }
 
 void increasefriendship(map<string, Villagerinfo> &m, const string &name) {
-    cout << "Enter villager name to increase friendship: ";
     auto it = m.find(name);
     if (it != m.end()) {
-        get<0>(it->second) += 1;
-        cout << "Increased friendship of " << name << " to " << get<0>(it->second) << ".\n";
+        cout << name << " not found.\n";
+        return;
+    }
+    int &friendship = get<0>(it->second);
+    if (friendship < 10) {
+        friendship += 1;
+        cout << "Increased friendship of " << name << " to " << friendship << ".\n";
     } else {
-        cout << "Villager " << name << " not found.\n";
+        cout << name << "'s friendship is already at maximum (10).\n";
     }
 }
 
 void decreasefriendship(map<string, Villagerinfo> &m, const string &name) {
-    cout << "Enter villager name to decrease friendship: ";
     auto it = m.find(name);
-    if (it != m.end()) {
-        get<0>(it->second) -= 1;
-        cout << "Decreased friendship of " << name << " to " << get<0>(it->second) << ".\n";
+    if (it == m.end()) {
+        cout << name << " not found.\n";
+        return;
+    }
+    int &friendship = get<0>(it->second);
+    if (friendship > 0) {
+        friendship -= 1;
+        cout << "Decreased friendship of " << name << " to " << friendship << ".\n";
     } else {
-        cout << "Villager " << name << " not found.\n";
+        cout << name << "'s friendship is already at minimum (0).\n";
     }
 }
 
+void searchvillager(const map<string, Villagerinfo> &m, const string &name) {
+    auto it = m.find(name);
+    if (it == m.end()) {
+        cout << name << " not found.\n";
+        return;
+    }
+    int friendship = get<0>(it->second);
+    string species = get<1>(it->second);
+    string catchphrase = get<2>(it->second);
+    cout << name << " [" << friendship << ", " << species << "] says: \"" << catchphrase << "\"\n";
+}
+
+void mstone3_demo() {
+
+    cout << "milestone 3 demo\n";
+
+    map<string, Villagerinfo> villager_details;
+    villager_details["Drago"]   = make_tuple(5,  string("Alligator"),  string("Snap into IT!"));
+    villager_details["Kyle"]    = make_tuple(10, string("Wolf"),       string("HUBBA HUBBA!!"));
+    villager_details["Raymond"] = make_tuple(8,  string("Cat"),        string("Nya nice fit!"));
+
+    while (true) {
+        int choice = mainmenu();
+        if (choice == 4) {
+            cout << "Exiting program.\n";
+            break;
+        }
+        string name;
+        cout << "Enter villager name: ";
+        getline(cin, name);
+        switch (choice) {
+            case 1:
+                increasefriendship(villager_details, name);
+                break;
+            case 2:
+                decreasefriendship(villager_details, name);
+                break;
+            case 3:
+                searchvillager(villager_details, name);
+                break;
+            default:
+                cout << "Invalid choice.\n";
+                break;
+        }
+    }
+
+    cout << "=== End Milestone 3 demo ===\n\n";
+}
 
 int main() {
     cout << "villager map milestones demo\n";
