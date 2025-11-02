@@ -47,12 +47,24 @@ void printvillagerM(const map<string, Villagerinfo> &m){
     }
         
 }
+void mstone2_demo() {
 
+    cout << "second milestone 2\n";
+
+    map<string, Villagerinfo> villager_details;
+    villager_details["Drago"] = make_tuple(150, "Cat", "Meow!");
+    villager_details["Kyle"] = make_tuple(200, "Dog", "Woof!");
+    villager_details["Raymond"] = make_tuple(250, "Ostrich", "Honk!");
+
+    printvillagerM(villager_details);
+
+    cout << "=== End Milestone 2 demo ===\n\n";
+}
 
 int main() {
     cout << "villager map milestones demo\n";
     mstone2_demo();
 
     return 0;
-    
+
 }
