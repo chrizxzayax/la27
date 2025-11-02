@@ -39,7 +39,7 @@ void printvillagerM(const map<string, Villagerinfo> &m){
         const Villagerinfo &info = p.second;
         int frendship = get<0>(info);
         const string &species = get<1>(info);
-        const string &catchphrase = get<2>(info);
+        const string &catchphrase = get<2>(info);// unpacking tuple
         cout << "  " << name << " : "
              << "friendship=" << frendship << ", "
              << "species=" << species << ", "
@@ -52,11 +52,11 @@ void mstone2_demo() {
     cout << "second milestone 2\n";
 
     map<string, Villagerinfo> villager_details;
-    villager_details["Drago"] = make_tuple(150, "Cat", "Meow!");
-    villager_details["Kyle"] = make_tuple(200, "Dog", "Woof!");
-    villager_details["Raymond"] = make_tuple(250, "Ostrich", "Honk!");
+    villager_details["Drago"]   = make_tuple(5,  string("Alligator"),  string("Snap into IT!"));
+    villager_details["Kyle"]    = make_tuple(10, string("Wolf"),       string("HUBBA HUBBA!!"));
+    villager_details["Raymond"] = make_tuple(8,  string("Cat"),        string("Nya nice fit!"));
 
-    printvillagerM(villager_details);
+    printvillagerM(villager_details);// print initial details
 
     cout << "=== End Milestone 2 demo ===\n\n";
 }
