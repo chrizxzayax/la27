@@ -3,8 +3,10 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <tuple>
 #include <string>
-
+#include <algorithm>
+#include <limits>
 
 using namespace std;
 
@@ -133,32 +135,34 @@ void mstone3_demo() {
     cout << "milestone 3 demo\n";
 
     map<string, Villagerinfo> villager_details;
-    villager_details["Drago"]   = make_tuple(5,  string("Alligator"),  string("Snap into IT!"));
-    villager_details["Kyle"]    = make_tuple(10, string("Wolf"),       string("HUBBA HUBBA!!"));
-    villager_details["Raymond"] = make_tuple(8,  string("Cat"),        string("Nya nice fit!"));
+    villager_details["Del"]   = make_tuple(8,  string("Alligator"),  string("got a snack?"));
 
-    while (true) {
+    bool done = false;
+    while (!done) {
         int choice = mainmenu();
-        if (choice == 4) {
-            cout << "Exiting program.\n";
-            break;
-        }
         string name;
-        cout << "Enter villager name: ";
-        getline(cin, name);
         switch (choice) {
             case 1:
+                cout << "villager name to increase";
+                getline(cin, name);
                 increasefriendship(villager_details, name);
+                printvillagerM(villager_details);
                 break;
             case 2:
+                cout << "villager name to decrease";
+                getline(cin, name);
                 decreasefriendship(villager_details, name);
+                printvillagerM(villager_details);
                 break;
             case 3:
+                cout << "villager name to search";
+                getline(cin, name);
                 searchvillager(villager_details, name);
                 break;
-            default:
-                cout << "Invalid choice.\n";
+            case 4:
+                done = true;
                 break;
+            
         }
     }
 
