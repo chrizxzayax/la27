@@ -61,6 +61,32 @@ void mstone2_demo() {
     cout << "=== End Milestone 2 demo ===\n\n";
 }
 
+int mainmenu() {
+    int choice;
+    while (true) {
+        cout << " basic villager menu\n";
+        cout << "1. Increase friendship\n";
+        cout << "2. Decrease Friendship\n";
+        cout << "3. Search Villager Details\n";
+        cout << "4. Exit\n";
+        cout << "Enter choice: ";
+        if (!(cin >> choice)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter a number between 1 and 4.\n";
+            continue;
+        }
+        if (choice < 1 || choice > 4) {
+            cout << "Invalid choice. Please enter a number between 1 and 4.\n";
+            continue;
+        }
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear input buffer
+        return choice;
+    }
+
+}
+
+
 int main() {
     cout << "villager map milestones demo\n";
     mstone2_demo();
