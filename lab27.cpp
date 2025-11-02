@@ -171,8 +171,40 @@ void mstone3_demo() {
 
 int main() {
     cout << "villager map milestones demo\n";
-    mstone2_demo();
+    cout << "milestone 3 demo\n";
 
-    return 0;
+    map<string, Villagerinfo> villager_details;
+    villager_details["Del"]   = make_tuple(8,  string("Alligator"),  string("got a snack?"));
+
+    bool done = false;
+    while (!done) {
+        int choice = mainmenu();
+        string name;
+        switch (choice) {
+            case 1:
+                cout << "villager name to increase";
+                getline(cin, name);
+                increasefriendship(villager_details, name);
+                printvillagerM(villager_details);
+                break;
+            case 2:
+                cout << "villager name to decrease";
+                getline(cin, name);
+                decreasefriendship(villager_details, name);
+                printvillagerM(villager_details);
+                break;
+            case 3:
+                cout << "villager name to search";
+                getline(cin, name);
+                searchvillager(villager_details, name);
+                break;
+            case 4:
+                done = true;
+                break;
+            
+        }
+    }
+
+    cout << "=== End Milestone 3 demo ===\n\n";
 
 }
