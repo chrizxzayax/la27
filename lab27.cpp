@@ -86,6 +86,28 @@ int mainmenu() {
 
 }
 
+void increasefriendship(map<string, Villagerinfo> &m, const string &name) {
+    cout << "Enter villager name to increase friendship: ";
+    auto it = m.find(name);
+    if (it != m.end()) {
+        get<0>(it->second) += 1;
+        cout << "Increased friendship of " << name << " to " << get<0>(it->second) << ".\n";
+    } else {
+        cout << "Villager " << name << " not found.\n";
+    }
+}
+
+void decreasefriendship(map<string, Villagerinfo> &m, const string &name) {
+    cout << "Enter villager name to decrease friendship: ";
+    auto it = m.find(name);
+    if (it != m.end()) {
+        get<0>(it->second) -= 1;
+        cout << "Decreased friendship of " << name << " to " << get<0>(it->second) << ".\n";
+    } else {
+        cout << "Villager " << name << " not found.\n";
+    }
+}
+
 
 int main() {
     cout << "villager map milestones demo\n";
